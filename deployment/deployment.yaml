@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: tcpbin
+  name: tcpbin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tcpbin
+  template:
+    metadata:
+      labels:
+        app: tcpbin
+    spec:
+      containers:
+      - image: bikertales/tcpbin:ac8ab9515e27782b200d2cee6e750ebabd620c28
+        name: tcpbin
+        imagePullPolicy: Always
+---
+kind: Service
+apiVersion: v1
+metadata:
+ name: fraud-check-svc
+spec:
+  ports:
+  - port: 8090
+    protocol: TCP
+    targetPort: 8090
+  selector:
+    app: tcpbin
+#spec:
+#  type: ExternalName
+#  externalName: skyknight
