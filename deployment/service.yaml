@@ -1,0 +1,7 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: fraud-check-ext-svc
+spec:
+  type: ExternalName
+  externalName: skyknight
